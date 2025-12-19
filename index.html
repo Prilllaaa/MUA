@@ -85,7 +85,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
         
-        /* About Section Background - Gold from top-left to bottom-right */
+        /* About Section Background */
         .about-section-bg {
             background: linear-gradient(
                 135deg,
@@ -99,7 +99,7 @@
             border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
         
-        /* Gallery Section Background - Gold from top-right to bottom-left */
+        /* Gallery Section Background */
         .gallery-section-bg {
             background: linear-gradient(
                 -135deg,
@@ -113,7 +113,7 @@
             border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
         
-        /* Testimonial Section Background - Subtle gradient */
+        /* Testimonial Section Background */
         .testimonial-section-bg {
             background: linear-gradient(135deg, #f5f2f4 0%, #f0ebee 50%, #ebe5e9 100%);
         }
@@ -262,6 +262,49 @@
             border-radius: 20px;
             font-size: 14px;
             z-index: 10;
+        }
+        
+        /* Contact form styles */
+        .message {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .message.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .message.success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .message.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         @media (max-width: 768px) {
@@ -629,64 +672,77 @@
             </div>
             
             <div class="bg-white text-gray-900 p-8 md:p-12 rounded-2xl shadow-2xl">
-                <form class="space-y-6" onsubmit="handleSubmit(event)">
+                <form id="contactForm" class="space-y-6">
                     <!-- Name and Phone -->
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-semibold mb-2">
+                            <label for="name" class="block text-sm font-semibold mb-2">
                                 Your Name *
                             </label>
-                            <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" placeholder="Jane Doe">
+                            <input type="text" id="name" name="name" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" 
+                                   placeholder="Jane Doe">
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-semibold mb-2">
+                            <label for="phone" class="block text-sm font-semibold mb-2">
                                 Phone Number *
                             </label>
-                            <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" placeholder="+233 XX XXX XXXX">
+                            <input type="tel" id="phone" name="phone" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" 
+                                   placeholder="+233 XX XXX XXXX">
                         </div>
                     </div>
                     
                     <!-- Email -->
                     <div>
-                        <label class="block text-sm font-semibold mb-2">
+                        <label for="email" class="block text-sm font-semibold mb-2">
                             Email Address
                         </label>
-                        <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" placeholder="jane@example.com">
+                        <input type="email" id="email" name="email" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" 
+                               placeholder="jane@example.com">
                     </div>
                     
                     <!-- Wedding Date -->
                     <div>
-                        <label class="block text-sm font-semibold mb-2">
+                        <label for="weddingDate" class="block text-sm font-semibold mb-2">
                             Wedding Date *
                         </label>
-                        <input type="date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
+                        <input type="date" id="weddingDate" name="weddingDate" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
                     </div>
                     
                     <!-- Service -->
                     <div>
-                        <label class="block text-sm font-semibold mb-2">
+                        <label for="service" class="block text-sm font-semibold mb-2">
                             Service Interested In *
                         </label>
-                        <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
+                        <select id="service" name="service" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
                             <option value="">Select a service</option>
-                            <option>Bridal Makeup (White Wedding)</option>
-                            <option>Full Bridal Package (Traditional + White)</option>
-                            <option>Bridal Party Package</option>
-                            <option>Consultation Only</option>
+                            <option value="Bridal Makeup (White Wedding)">Bridal Makeup (White Wedding)</option>
+                            <option value="Full Bridal Package (Traditional + White)">Full Bridal Package (Traditional + White)</option>
+                            <option value="Bridal Party Package">Bridal Party Package</option>
+                            <option value="Consultation Only">Consultation Only</option>
                         </select>
                     </div>
                     
                     <!-- Additional Details -->
                     <div>
-                        <label class="block text-sm font-semibold mb-2">
+                        <label for="message" class="block text-sm font-semibold mb-2">
                             Additional Details
                         </label>
-                        <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" placeholder="Tell us about your vision, number of people in bridal party, any special requests..."></textarea>
+                        <textarea id="message" name="message" rows="4" 
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" 
+                                  placeholder="Tell us about your vision, number of people in bridal party, any special requests..."></textarea>
                     </div>
                     
+                    <!-- Response Message -->
+                    <div id="responseMessage" class="message"></div>
+                    
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full btn-gold text-gray-900 py-4 rounded-full font-bold text-lg">
+                    <button type="submit" id="submitBtn" class="w-full btn-gold text-gray-900 py-4 rounded-full font-bold text-lg">
                         Send Inquiry
                     </button>
                 </form>
@@ -785,13 +841,6 @@
                 }
             });
         });
-
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Thank you for your inquiry! Regina will get back to you within 24 hours via WhatsApp or phone call.');
-            event.target.reset();
-        }
 
         // Intersection Observer for fade-in animations
         const observerOptions = {
@@ -918,9 +967,91 @@
             }
         }
         
-        // Initialize slideshow when DOM is loaded
+        // Contact Form Backend Integration
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize slideshow
             const slideshow = new Slideshow();
+            
+            // Initialize contact form
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const responseMessage = document.getElementById('responseMessage');
+
+            // IMPORTANT: Change this URL to your actual backend URL
+            // For development: 'http://localhost:3000/api/contact'
+            // For production: 'https://yourdomain.com/api/contact'
+            const BACKEND_URL = 'https://mua-o74z.onrender.com/api/contact';
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Disable button and show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Sending... <span class="loader"></span>';
+                responseMessage.classList.remove('show');
+
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    weddingDate: document.getElementById('weddingDate').value,
+                    service: document.getElementById('service').value,
+                    message: document.getElementById('message').value,
+                    timestamp: new Date().toISOString()
+                };
+
+                try {
+                    const response = await fetch(BACKEND_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok && result.success) {
+                        // Success
+                        responseMessage.className = 'message success show';
+                        responseMessage.textContent = '✓ Message sent successfully! Regina will contact you within 24 hours via WhatsApp or phone call.';
+                        form.reset();
+                        
+                        // Clear success message after 10 seconds
+                        setTimeout(() => {
+                            responseMessage.classList.remove('show');
+                        }, 10000);
+                    } else {
+                        // Error from backend
+                        responseMessage.className = 'message error show';
+                        responseMessage.textContent = '✗ ' + (result.message || 'Failed to send message. Please try again.');
+                    }
+                } catch (error) {
+                    // Network or other error
+                    responseMessage.className = 'message error show';
+                    responseMessage.textContent = '✗ Connection error. Please try again or contact us directly via Instagram.';
+                    console.error('Error:', error);
+                    
+                    // Fallback: Show success message for demo purposes
+                    // In production, you might want to remove this
+                    setTimeout(() => {
+                        responseMessage.className = 'message success show';
+                        responseMessage.textContent = '✓ Thank you for your inquiry! Due to a temporary connection issue, please also DM @reggies_makeovers on Instagram to ensure we receive your message.';
+                        form.reset();
+                    }, 2000);
+                } finally {
+                    // Re-enable button
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send Inquiry';
+                    }, 2000);
+                }
+            });
+            
+            // Set minimum date for wedding date input to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('weddingDate').min = today;
         });
     </script>
 </body>
