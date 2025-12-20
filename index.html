@@ -5,335 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reggie's Makeover | Award-Winning Bridal Makeup Artist in Accra</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            background: linear-gradient(135deg, #fefbf6 0%, #faf5f0 50%, #f6f0e9 100%);
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cormorant Garamond', serif;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #1a0b0e 0%, #4a1a2c 50%, #8b3a62 100%);
-        }
-        
-        .text-gold {
-            color: #d4af37;
-        }
-        
-        .bg-gold {
-            background-color: #d4af37;
-        }
-        
-        .btn-gold {
-            background: linear-gradient(135deg, #d4af37 0%, #f4e4a8 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-        }
-        
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .stat-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-        }
-        
-        .testimonial-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f9f7f9 100%);
-            border: 1px solid #f0e8ec;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* About Section Background */
-        .about-section-bg {
-            background: linear-gradient(
-                135deg,
-                rgba(162, 125, 1, 0.517) 0%,
-                rgba(223, 180, 38, 0.464) 25%,
-                rgba(190, 154, 35, 0) 50%,
-                rgba(212, 175, 55, 0.03) 75%,
-                rgba(212, 175, 55, 0.05) 100%
-            );
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-        
-        /* Gallery Section Background */
-        .gallery-section-bg {
-            background: linear-gradient(
-                -135deg,
-                rgba(212, 175, 55, 0.05) 0%,
-                rgba(212, 175, 55, 0.03) 25%,
-                rgba(212, 175, 55, 0.01) 50%,
-                rgba(212, 175, 55, 0.03) 75%,
-                rgba(212, 175, 55, 0.05) 100%
-            );
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-        
-        /* Testimonial Section Background */
-        .testimonial-section-bg {
-            background: linear-gradient(135deg, #f5f2f4 0%, #f0ebee 50%, #ebe5e9 100%);
-        }
-        
-        nav {
-            backdrop-filter: blur(10px);
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
-            transition: background 0.3s ease;
-        }
-        
-        nav.scrolled {
-            background: rgba(26, 11, 14, 0.95);
-        }
-        
-        nav a, nav .text-white {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        .fade-in {
-            animation: fadeIn 1s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Slideshow Styles */
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            background: #f8f5f7;
-        }
-        
-        .slideshow-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8f5f7;
-        }
-        
-        .slideshow-slide.active {
-            opacity: 1;
-        }
-        
-        .slideshow-slide img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            display: block;
-        }
-        
-        .slideshow-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            z-index: 10;
-        }
-        
-        .slideshow-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        
-        .slideshow-dot.active {
-            background: #d4af37;
-            transform: scale(1.2);
-        }
-        
-        .slideshow-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-        
-        .slideshow-nav:hover {
-            background: #d4af37;
-        }
-        
-        .slideshow-prev {
-            left: 20px;
-        }
-        
-        .slideshow-next {
-            right: 20px;
-        }
-        
-        .slideshow-counter {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            z-index: 10;
-        }
-        
-        /* Contact form styles */
-        .message {
-            display: none;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            text-align: center;
-            font-weight: 500;
-        }
-        
-        .message.show {
-            display: block;
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        .message.success {
-            background-color: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-        
-        .message.error {
-            background-color: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-        
-        .loader {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #d4af37;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 8px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @media (max-width: 768px) {
-            .slideshow-container {
-                height: 500px;
-            }
-            
-            .slideshow-nav {
-                width: 40px;
-                height: 40px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .slideshow-container {
-                height: 400px;
-            }
-            
-            .slideshow-nav {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .slideshow-counter {
-                top: 10px;
-                right: 10px;
-            }
-        }
-    </style>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="text-gray-800">
@@ -345,18 +25,10 @@
             </div>
             
             <div class="hidden md:flex space-x-8 text-white">
-                <a href="#home" class="hover:text-gold transition">
-                    Home
-                </a>
-                <a href="#about" class="hover:text-gold transition">
-                    About
-                </a>
-                <a href="#gallery" class="hover:text-gold transition">
-                    Gallery
-                </a>
-                <a href="#contact" class="hover:text-gold transition">
-                    Contact
-                </a>
+                <a href="#home" class="hover:text-gold transition">Home</a>
+                <a href="#about" class="hover:text-gold transition">About</a>
+                <a href="#gallery" class="hover:text-gold transition">Gallery</a>
+                <a href="#contact" class="hover:text-gold transition">Contact</a>
             </div>
             
             <a href="#contact" class="btn-gold text-gray-900 px-6 py-2 rounded-full font-semibold">
@@ -394,30 +66,18 @@
             <!-- Stats -->
             <div class="grid grid-cols-3 gap-6 mt-16 max-w-3xl mx-auto">
                 <div class="stat-card p-6 rounded-lg">
-                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2">
-                        12+
-                    </div>
-                    <div class="text-sm md:text-base text-gray-300">
-                        Years Experience
-                    </div>
+                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2">12+</div>
+                    <div class="text-sm md:text-base text-gray-300">Years Experience</div>
                 </div>
                 
                 <div class="stat-card p-6 rounded-lg">
-                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2">
-                        2,500+
-                    </div>
-                    <div class="text-sm md:text-base text-gray-300">
-                        Brides Served
-                    </div>
+                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2">2,500+</div>
+                    <div class="text-sm md:text-base text-gray-300">Brides Served</div>
                 </div>
                 
                 <div class="stat-card p-6 rounded-lg">
-                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2">
-                        #1
-                    </div>
-                    <div class="text-sm md:text-base text-gray-300">
-                        In Ghana
-                    </div>
+                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2">#1</div>
+                    <div class="text-sm md:text-base text-gray-300">In Ghana</div>
                 </div>
             </div>
         </div>
@@ -432,62 +92,44 @@
                     <div class="slideshow-container">
                         <!-- Slideshow Slides -->
                         <div class="slideshow-slide active">
-                            <img src="reggie1.jpeg" alt="Regina Ama Dumah - Founder & Lead Artist" class="w-full h-full object-contain">
+                            <img src="reggie1.jpeg">
                         </div>
                         
                         <div class="slideshow-slide">
-                            <img src="reggie2.jpeg" alt="Regina at work creating bridal magic" class="w-full h-full object-contain">
+                            <img src="reggie2.jpeg">
                         </div>
                         
                         <div class="slideshow-slide">
-                            <img src="reggie3.jpeg" alt="Regina showcasing her artistry" class="w-full h-full object-contain">
+                            <img src="reggie3.jpeg" >
                         </div>
                         
                         <div class="slideshow-slide">
-                            <img src="reggie4.jpeg" alt="Regina with happy client" class="w-full h-full object-contain">
+                            <img src="reggie4.jpeg" >
                         </div>
                         
                         <div class="slideshow-slide">
-                            <img src="reggie5.jpeg" alt="Professional portrait of Regina" class="w-full h-full object-contain">
+                            <img src="reggie5.jpeg">
                         </div>
                         
                         <div class="slideshow-slide">
-                            <img src="reggie6.jpeg" alt="Regina in her makeup studio" class="w-full h-full object-contain">
+                            <img src="reggie6.jpeg" >
                         </div>
                         
                         <div class="slideshow-slide">
-                            <img src="reggie7.jpeg" alt="Regina's makeup artistry" class="w-full h-full object-contain">
+                            <img src="reggie7.jpeg">
                         </div>
                         
                         <div class="slideshow-slide">
-                            <img src="reggie8.jpeg" alt="Regina's award-winning work" class="w-full h-full object-contain">
+                            <img src="reggie8.jpeg">
                         </div>
                         
-                        <!-- Navigation Buttons -->
-                        <button class="slideshow-nav slideshow-prev">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
                         
-                        <button class="slideshow-nav slideshow-next">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
                         
-                        <!-- Counter -->
-                        <div class="slideshow-counter">
-                            <span id="current-slide">1</span> / <span id="total-slides">8</span>
-                        </div>
                         
-                        <!-- Dots Indicator -->
-                        <div class="slideshow-dots">
-                            <span class="slideshow-dot active" data-slide="0"></span>
-                            <span class="slideshow-dot" data-slide="1"></span>
-                            <span class="slideshow-dot" data-slide="2"></span>
-                            <span class="slideshow-dot" data-slide="3"></span>
-                            <span class="slideshow-dot" data-slide="4"></span>
-                            <span class="slideshow-dot" data-slide="5"></span>
-                            <span class="slideshow-dot" data-slide="6"></span>
-                            <span class="slideshow-dot" data-slide="7"></span>
-                        </div>
+                        
+                        
+                        
+                       
                     </div>
                 </div>
                 
@@ -549,32 +191,32 @@
             
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div class="gallery-item h-64 rounded-lg overflow-hidden">
-                    <img src="bride1.jpeg" alt="Beautiful bride - Reggie's Makeover" class="w-full h-full object-cover">
+                    <img src="bride1.jpeg">
                 </div>
                 
                 <div class="gallery-item h-64 rounded-lg overflow-hidden">
-                    <img src="bride2.jpeg" alt="Stunning bridal makeup" class="w-full h-full object-cover">
+                    <img src="bride2.jpeg">
                 </div>
                 
                 <div class="gallery-item h-64 rounded-lg overflow-hidden">
-                    <img src="bride3.jpeg" alt="Elegant bridal look" class="w-full h-full object-cover">
+                    <img src="bride3.jpeg">
                 </div>
                 
                 <div class="gallery-item h-64 rounded-lg overflow-hidden">
-                    <img src="bride4.jpeg" alt="Bridal perfection" class="w-full h-full object-cover">
+                    <img src="bride4.jpeg" >
                 </div>
                 
                 <div class="gallery-item h-64 rounded-lg overflow-hidden">
-                    <img src="bride5.jpeg" alt="Radiant bride" class="w-full h-full object-cover">
+                    <img src="bride5.jpeg" >
                 </div>
                 
                 <div class="gallery-item h-64 rounded-lg overflow-hidden">
-                    <img src="bride6.jpeg" alt="Gorgeous bridal style" class="w-full h-full object-cover">
+                    <img src="bride6.jpeg">
                 </div>
             </div>
             
             <div class="text-center mt-12">
-                <a href="https://www.instagram.com/reggies_makeovers" target="_blank" class="inline-block border-2 border-gold text-gold px-8 py-4 rounded-full font-semibold hover:bg-gold hover:text-gray-900 transition">
+                <a href="https://www.instagram.com/reggies_makeovers" target="_blank" class="inline-block border-2 border-gold text-black px-8 py-4 rounded-full font-semibold hover:bg-gold hover:text-gray-900 transition">
                     View Full Portfolio on Instagram
                 </a>
             </div>
@@ -672,86 +314,59 @@
             </div>
             
             <div class="bg-white text-gray-900 p-8 md:p-12 rounded-2xl shadow-2xl">
-                <form id="contactForm" class="space-y-6">
+                <form id="contact-form" class="space-y-6">
                     <!-- Name and Phone -->
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-semibold mb-2">
-                                Your Name *
-                            </label>
-                            <input type="text" id="name" name="name" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" 
-                                   placeholder="Jane Doe">
+                            <label class="block text-sm font-semibold mb-2">Your Name *</label>
+                            <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" placeholder="Jane Doe">
                         </div>
                         
                         <div>
-                            <label for="phone" class="block text-sm font-semibold mb-2">
-                                Phone Number *
-                            </label>
-                            <input type="tel" id="phone" name="phone" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" 
-                                   placeholder="+233 XX XXX XXXX">
+                            <label class="block text-sm font-semibold mb-2">Phone Number *</label>
+                            <input type="tel" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" placeholder="+233 XX XXX XXXX">
                         </div>
                     </div>
                     
                     <!-- Email -->
                     <div>
-                        <label for="email" class="block text-sm font-semibold mb-2">
-                            Email Address
-                        </label>
-                        <input type="email" id="email" name="email" 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" 
-                               placeholder="jane@example.com">
+                        <label class="block text-sm font-semibold mb-2">Email Address</label>
+                        <input type="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" placeholder="jane@example.com">
                     </div>
                     
                     <!-- Wedding Date -->
                     <div>
-                        <label for="weddingDate" class="block text-sm font-semibold mb-2">
-                            Wedding Date *
-                        </label>
-                        <input type="date" id="weddingDate" name="weddingDate" required 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
+                        <label class="block text-sm font-semibold mb-2">Wedding Date *</label>
+                        <input type="date" name="wedding_date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
                     </div>
                     
                     <!-- Service -->
                     <div>
-                        <label for="service" class="block text-sm font-semibold mb-2">
-                            Service Interested In *
-                        </label>
-                        <select id="service" name="service" required 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
+                        <label class="block text-sm font-semibold mb-2">Service Interested In *</label>
+                        <select name="service" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
                             <option value="">Select a service</option>
-                            <option value="Bridal Makeup (White Wedding)">Bridal Makeup (White Wedding)</option>
-                            <option value="Full Bridal Package (Traditional + White)">Full Bridal Package (Traditional + White)</option>
-                            <option value="Bridal Party Package">Bridal Party Package</option>
-                            <option value="Consultation Only">Consultation Only</option>
+                            <option>Bridal Makeup (White Wedding)</option>
+                            <option>Full Bridal Package (Traditional + White)</option>
+                            <option>Bridal Party Package</option>
+                            <option>Consultation Only</option>
                         </select>
                     </div>
                     
                     <!-- Additional Details -->
                     <div>
-                        <label for="message" class="block text-sm font-semibold mb-2">
-                            Additional Details
-                        </label>
-                        <textarea id="message" name="message" rows="4" 
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" 
-                                  placeholder="Tell us about your vision, number of people in bridal party, any special requests..."></textarea>
+                        <label class="block text-sm font-semibold mb-2">Additional Details</label>
+                        <textarea name="details" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold" placeholder="Tell us about your vision, number of people in bridal party, any special requests..."></textarea>
                     </div>
                     
-                    <!-- Response Message -->
-                    <div id="responseMessage" class="message"></div>
-                    
                     <!-- Submit Button -->
-                    <button type="submit" id="submitBtn" class="w-full btn-gold text-gray-900 py-4 rounded-full font-bold text-lg">
+                    <button type="submit" class="w-full btn-gold text-gray-900 py-4 rounded-full font-bold text-lg">
                         Send Inquiry
                     </button>
                 </form>
                 
                 <!-- Contact Info -->
                 <div class="mt-12 pt-8 border-t border-gray-200 text-center">
-                    <div class="text-2xl font-bold mb-4">
-                        Or Reach Us Directly
-                    </div>
+                    <div class="text-2xl font-bold mb-4">Or Reach Us Directly</div>
                     
                     <div class="space-y-3 text-gray-700">
                         <div class="flex items-center justify-center">
@@ -788,271 +403,16 @@
             </p>
             
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://www.instagram.com/reggies_makeovers" target="_blank" class="text-gold hover:text-white transition text-2xl">
-                    📷
-                </a>
-                
-                <a href="#" class="text-gold hover:text-white transition text-2xl">
-                    💬
-                </a>
-                
-                <a href="#" class="text-gold hover:text-white transition text-2xl">
-                    📧
-                </a>
+                <a href="https://www.instagram.com/reggies_makeovers" target="_blank" class="text-gold hover:text-white transition text-2xl">📷</a>
+                <a href="#" class="text-gold hover:text-white transition text-2xl">💬</a>
+                <a href="#" class="text-gold hover:text-white transition text-2xl">📧</a>
             </div>
             
-            <p class="text-gray-500 text-sm">
-                © 2024 Reggie's Makeover. All rights reserved.
-            </p>
+            <p class="text-gray-500 text-sm">© 2024 Reggie's Makeover. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // Scroll to top on page load/refresh
-        window.addEventListener('beforeunload', () => {
-            window.scrollTo(0, 0);
-        });
-        
-        // Also scroll to top when page loads
-        window.onload = () => {
-            window.scrollTo(0, 0);
-        };
-
-        // Navbar background on scroll
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections for fade-in animation
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-        
-        // Slideshow Functionality
-        class Slideshow {
-            constructor() {
-                this.slides = document.querySelectorAll('.slideshow-slide');
-                this.dots = document.querySelectorAll('.slideshow-dot');
-                this.prevBtn = document.querySelector('.slideshow-prev');
-                this.nextBtn = document.querySelector('.slideshow-next');
-                this.currentSlide = 0;
-                this.totalSlides = this.slides.length;
-                this.autoSlideInterval = null;
-                
-                this.init();
-            }
-            
-            init() {
-                // Set total slides counter
-                document.getElementById('total-slides').textContent = this.totalSlides;
-                
-                // Event listeners for navigation buttons
-                this.prevBtn.addEventListener('click', () => this.prevSlide());
-                this.nextBtn.addEventListener('click', () => this.nextSlide());
-                
-                // Event listeners for dots
-                this.dots.forEach(dot => {
-                    dot.addEventListener('click', (e) => {
-                        const slideIndex = parseInt(e.target.getAttribute('data-slide'));
-                        this.goToSlide(slideIndex);
-                    });
-                });
-                
-                // Start auto-slide
-                this.startAutoSlide();
-                
-                // Pause auto-slide on hover
-                const slideshowContainer = document.querySelector('.slideshow-container');
-                slideshowContainer.addEventListener('mouseenter', () => this.stopAutoSlide());
-                slideshowContainer.addEventListener('mouseleave', () => this.startAutoSlide());
-                
-                // Keyboard navigation
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'ArrowLeft') {
-                        this.prevSlide();
-                    } else if (e.key === 'ArrowRight') {
-                        this.nextSlide();
-                    }
-                });
-            }
-            
-            showSlide(index) {
-                // Hide all slides
-                this.slides.forEach(slide => {
-                    slide.classList.remove('active');
-                });
-                
-                // Remove active class from all dots
-                this.dots.forEach(dot => {
-                    dot.classList.remove('active');
-                });
-                
-                // Show current slide
-                this.slides[index].classList.add('active');
-                this.dots[index].classList.add('active');
-                
-                // Update counter
-                document.getElementById('current-slide').textContent = index + 1;
-                
-                this.currentSlide = index;
-            }
-            
-            nextSlide() {
-                let nextIndex = this.currentSlide + 1;
-                if (nextIndex >= this.totalSlides) {
-                    nextIndex = 0;
-                }
-                this.showSlide(nextIndex);
-            }
-            
-            prevSlide() {
-                let prevIndex = this.currentSlide - 1;
-                if (prevIndex < 0) {
-                    prevIndex = this.totalSlides - 1;
-                }
-                this.showSlide(prevIndex);
-            }
-            
-            goToSlide(index) {
-                if (index >= 0 && index < this.totalSlides) {
-                    this.showSlide(index);
-                }
-            }
-            
-            startAutoSlide() {
-                this.stopAutoSlide(); // Clear any existing interval
-                this.autoSlideInterval = setInterval(() => {
-                    this.nextSlide();
-                }, 5000); // Change slide every 5 seconds
-            }
-            
-            stopAutoSlide() {
-                if (this.autoSlideInterval) {
-                    clearInterval(this.autoSlideInterval);
-                    this.autoSlideInterval = null;
-                }
-            }
-        }
-        
-        // Contact Form Backend Integration
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize slideshow
-            const slideshow = new Slideshow();
-            
-            // Initialize contact form
-            const form = document.getElementById('contactForm');
-            const submitBtn = document.getElementById('submitBtn');
-            const responseMessage = document.getElementById('responseMessage');
-
-            // IMPORTANT: Change this URL to your actual backend URL
-            // For development: 'http://localhost:3000/api/contact'
-            // For production: 'https://yourdomain.com/api/contact'
-            const BACKEND_URL = 'https://mua-o74z.onrender.com/api/contact';
-
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                // Disable button and show loading state
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = 'Sending... <span class="loader"></span>';
-                responseMessage.classList.remove('show');
-
-                // Get form data
-                const formData = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    weddingDate: document.getElementById('weddingDate').value,
-                    service: document.getElementById('service').value,
-                    message: document.getElementById('message').value,
-                    timestamp: new Date().toISOString()
-                };
-
-                try {
-                    const response = await fetch(BACKEND_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(formData)
-                    });
-
-                    const result = await response.json();
-
-                    if (response.ok && result.success) {
-                        // Success
-                        responseMessage.className = 'message success show';
-                        responseMessage.textContent = '✓ Message sent successfully! Regina will contact you within 24 hours via WhatsApp or phone call.';
-                        form.reset();
-                        
-                        // Clear success message after 10 seconds
-                        setTimeout(() => {
-                            responseMessage.classList.remove('show');
-                        }, 10000);
-                    } else {
-                        // Error from backend
-                        responseMessage.className = 'message error show';
-                        responseMessage.textContent = '✗ ' + (result.message || 'Failed to send message. Please try again.');
-                    }
-                } catch (error) {
-                    // Network or other error
-                    responseMessage.className = 'message error show';
-                    responseMessage.textContent = '✗ Connection error. Please try again or contact us directly via Instagram.';
-                    console.error('Error:', error);
-                    
-                    // Fallback: Show success message for demo purposes
-                    // In production, you might want to remove this
-                    setTimeout(() => {
-                        responseMessage.className = 'message success show';
-                        responseMessage.textContent = '✓ Thank you for your inquiry! Due to a temporary connection issue, please also DM @reggies_makeovers on Instagram to ensure we receive your message.';
-                        form.reset();
-                    }, 2000);
-                } finally {
-                    // Re-enable button
-                    setTimeout(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Send Inquiry';
-                    }, 2000);
-                }
-            });
-            
-            // Set minimum date for wedding date input to today
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('weddingDate').min = today;
-        });
-    </script>
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
