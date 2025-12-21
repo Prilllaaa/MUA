@@ -36,33 +36,48 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission handler (Frontend only - no backend connection yet)
+// Form submission handler with Formspree and Loading Spinner
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        alert('Thank you for your inquiry! Regina will get back to you within 24 hours via WhatsApp or phone call.');
-        this.reset();
+        
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        
+        // Show loading state with spinner
+        submitButton.innerHTML = '<span class="spinner"></span> Sending...';
+        submitButton.disabled = true;
+        
+        try {
+            const formData = new FormData(this);
+            const response = await fetch('https://formspree.io/f/xqezlbpn', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                alert('Thank you for your inquiry! Regina will get back to you within 24 hours via WhatsApp or phone call.');
+                this.reset();
+            } else {
+                alert('Oops! There was a problem submitting your form. Please try again or contact us directly via WhatsApp.');
+            }
+        } catch (error) {
+            alert('Oops! There was a problem submitting your form. Please try again or contact us directly via WhatsApp.');
+        } finally {
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+        }
     });
 }
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-        }
-    });
-}, observerOptions);
-
-// Observe all sections for fade-in animation
-document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
+// Remove fade-in animations - make sections static
+const sections = document.querySelectorAll('section');
+sections.forEach(section => {
+    section.style.opacity = '1';
 });
 
 // ===================================
@@ -86,4 +101,149 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Change slide every 4 seconds
     setInterval(showNextSlide, 4000);
+});
+
+// ===================================
+// GALLERY LIGHTBOX WITH NAVIGATION
+// ===================================
+document.addEventListener('DOMContentLoaded', () => {
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    let currentImageIndex = 0;
+    
+    // Create lightbox HTML
+    const lightbox = document.createElement('div');
+    lightbox.id = 'gallery-lightbox';
+    lightbox.innerHTML = `
+        <div class="lightbox-overlay">
+            <button class="lightbox-close">&times;</button>
+            <button class="lightbox-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+            </button>
+            <img class="lightbox-image" src="" alt="Bride">
+            <button class="lightbox-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </button>
+            <div class="lightbox-counter"></div>
+        </div>
+    `;
+    document.body.appendChild(lightbox);
+    
+    const lightboxOverlay = lightbox.querySelector('.lightbox-overlay');
+    const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox.querySelector('.lightbox-next');
+    const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+    
+    // Open lightbox on image click
+    galleryItems.forEach((item, index) => {
+        item.parentElement.addEventListener('click', () => {
+            currentImageIndex = index;
+            showImage(currentImageIndex);
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    // Show image function
+    function showImage(index) {
+        lightboxImage.src = galleryItems[index].src;
+        lightboxCounter.textContent = `${index + 1} / ${galleryItems.length}`;
+    }
+    
+    // Close lightbox
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxOverlay.addEventListener('click', (e) => {
+        if (e.target === lightboxOverlay) {
+            closeLightbox();
+        }
+    });
+    
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Previous image
+    lightboxPrev.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+        showImage(currentImageIndex);
+    });
+    
+    // Next image
+    lightboxNext.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+        showImage(currentImageIndex);
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') lightboxPrev.click();
+        if (e.key === 'ArrowRight') lightboxNext.click();
+    });
+});
+
+// ===================================
+// TESTIMONIALS CAROUSEL
+// ===================================
+document.addEventListener('DOMContentLoaded', () => {
+    const testimonialsContainer = document.querySelector('.testimonials-grid');
+    if (!testimonialsContainer) return;
+    
+    const prevBtn = document.querySelector('.testimonials-prev');
+    const nextBtn = document.querySelector('.testimonials-next');
+    
+    if (!prevBtn || !nextBtn) return;
+    
+    let currentPosition = 0;
+    const testimonials = testimonialsContainer.querySelectorAll('.testimonial-card');
+    const totalTestimonials = testimonials.length;
+    
+    // Determine visible cards based on screen size
+    function getVisibleCards() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 768) return 2;
+        return 1;
+    }
+    
+    function updateCarousel() {
+        const visibleCards = getVisibleCards();
+        const maxPosition = Math.max(0, totalTestimonials - visibleCards);
+        
+        // Clamp position
+        currentPosition = Math.min(Math.max(0, currentPosition), maxPosition);
+        
+        const cardWidth = testimonials[0].offsetWidth;
+        const gap = 32; // 2rem gap
+        const offset = -(currentPosition * (cardWidth + gap));
+        
+        testimonialsContainer.style.transform = `translateX(${offset}px)`;
+        
+        // Update button states
+        prevBtn.disabled = currentPosition === 0;
+        nextBtn.disabled = currentPosition >= maxPosition;
+    }
+    
+    prevBtn.addEventListener('click', () => {
+        currentPosition--;
+        updateCarousel();
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        currentPosition++;
+        updateCarousel();
+    });
+    
+    // Update on window resize
+    window.addEventListener('resize', updateCarousel);
+    
+    // Initial update
+    updateCarousel();
 });
