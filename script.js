@@ -60,7 +60,7 @@ if (contactForm) {
             });
             
             if (response.ok) {
-                alert('Thank you for your inquiry! Regina will get back to you within 24 hours via WhatsApp or phone call.');
+                alert('Email received sucessfully! Reggies Makeovers will get back to you within 24 hours via WhatsApp or phone call.');
                 this.reset();
             } else {
                 alert('Oops! There was a problem submitting your form. Please try again or contact us directly via WhatsApp.');
@@ -247,3 +247,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial update
     updateCarousel();
 });
+
