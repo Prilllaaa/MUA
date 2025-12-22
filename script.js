@@ -36,7 +36,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission handler with Formspree and Loading Spinner
+// Form submission handler with Formspree and Custom Modal
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
@@ -60,13 +60,28 @@ if (contactForm) {
             });
             
             if (response.ok) {
-                alert('Email received sucessfully! Reggies Makeovers will get back to you within 24 hours via WhatsApp or phone call.');
+                showModal(
+                    'success',
+                    '✨',
+                    'Thank You!',
+                    "Your email has been received! Reggies Makeovers will get back to you within 24 hours via WhatsApp or phone call. We're excited to make your special day beautiful!"
+                );
                 this.reset();
             } else {
-                alert('Oops! There was a problem submitting your form. Please try again or contact us directly via WhatsApp.');
+                showModal(
+                    'error',
+                    '⚠️',
+                    'Oops!',
+                    "There was a problem submitting your form. Please try again."
+                );
             }
         } catch (error) {
-            alert('Oops! There was a problem submitting your form. Please try again or contact us directly via WhatsApp.');
+            showModal(
+                'error',
+                '⚠️',
+                'Connection Error',
+                "Unable to send your message right now. Please contact us directly via WhatsApp or Instagram."
+            );
         } finally {
             submitButton.innerHTML = originalText;
             submitButton.disabled = false;
@@ -74,11 +89,82 @@ if (contactForm) {
     });
 }
 
+// Custom Modal Function
+function showModal(type, icon, title, message) {
+    // Remove existing modal if any
+    const existingModal = document.getElementById('custom-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // Create modal
+    const modal = document.createElement('div');
+    modal.id = 'custom-modal';
+    modal.className = 'custom-modal';
+    
+    const buttonClass = type === 'error' ? 'error-btn' : '';
+    
+    modal.innerHTML = `
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-icon ${type}">
+                ${icon}
+            </div>
+            <h3 class="modal-title">${title}</h3>
+            <p class="modal-message">${message}</p>
+            <button class="modal-button ${buttonClass}" onclick="closeModal()">
+                ${type === 'success' ? 'Awesome!' : 'Got it'}
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Show modal with animation
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+    
+    // Auto close after 8 seconds for success
+    if (type === 'success') {
+        setTimeout(() => {
+            closeModal();
+        }, 8000);
+    }
+}
+
+// Close Modal Function
+function closeModal() {
+    const modal = document.getElementById('custom-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('custom-modal');
+    if (modal && e.target === modal) {
+        closeModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+
+
 // Remove fade-in animations - make sections static
 const sections = document.querySelectorAll('section');
 sections.forEach(section => {
     section.style.opacity = '1';
-});
+})
 
 // ===================================
 // SIMPLE AUTO-SLIDESHOW (No Controls)
@@ -247,4 +333,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial update
     updateCarousel();
 });
-
